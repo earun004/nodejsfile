@@ -1,0 +1,163 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/angular-app",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+			  "src/assets/libraries/slick/slick.css",
+			  "src/assets/libraries/slick/slick-theme.css",
+			  "src/assets/css/trackpad-scroll-emulator.css",
+			  "src/assets/css/chartist.min.css",
+			  "src/assets/css/jquery.raty.css",
+			  "src/assets/fonts/font-awesome/css/font-awesome.min.css",
+			  "src/assets/css/nouislider.min.css",
+			  "src/assets/css/explorer.css",
+            ],
+            "scripts": [
+				"src/assets/js/jquery.js",
+				"src/assets/js/tether.min.js",
+				"src/assets/js/bootstrap.min.js",
+				"src/assets/js/chartist.min.js",
+				"src/assets/js/google-map-richmarker.min.js",
+				"src/assets/js/google-map-infobox.min.js",
+				"src/assets/js/google-map-markerclusterer.js",
+				"src/assets/js/google-map.js",
+				"src/assets/js/jquery.trackpad-scroll-emulator.min.js",
+				"src/assets/js/jquery.inlinesvg.min.js",
+				"src/assets/js/jquery.affix.js",
+				"src/assets/js/jquery.scrollTo.js",
+				"src/assets/libraries/slick/slick.min.js",
+				"src/assets/js/nouislider.min.js",
+				"src/assets/js/jquery.raty.js",
+				"src/assets/js/wNumb.js",
+				"src/assets/js/particles.min.js",
+				"src/assets/js/explorer.js",
+				//"src/assets/js/explorer-map-search.js",
+			]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "angular-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "angular-app-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "angular-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "angular-app"
+}
